@@ -16,4 +16,9 @@ public class CompiledProgrammingLanguage {
     public String getCompilerCommand() {
         return compilerCommand;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (compiled with %s)", name, compilerCommand);
+    }
 }
