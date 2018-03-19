@@ -1,7 +1,8 @@
 package com.galvanize;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class CompiledProgrammingLanguageTest {
 
@@ -10,8 +11,8 @@ public class CompiledProgrammingLanguageTest {
         CompiledProgrammingLanguage java = new CompiledProgrammingLanguage();
         java.setName("Java");
         java.setCompilerCommand("javac");
-        Assert.assertEquals("javac", java.getCompilerCommand());
-        Assert.assertEquals("Java (compiled with javac)", java.toString());
+        assertEquals("javac", java.getCompilerCommand());
+        assertEquals("Java (compiled with javac)", java.toString());
     }
 
 }

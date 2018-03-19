@@ -1,13 +1,8 @@
 package com.galvanize;
 
-public class CompiledProgrammingLanguage {
+public class CompiledProgrammingLanguage extends ProgrammingLanguage {
 
-    private String name;
     private String compilerCommand;
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setCompilerCommand(String compilerCommand) {
         this.compilerCommand = compilerCommand;
@@ -19,6 +14,6 @@ public class CompiledProgrammingLanguage {
 
     @Override
     public String toString() {
-        return String.format("%s (compiled with %s)", name, compilerCommand);
+        return String.format("%s (compiled with %s)", this.getName(), compilerCommand);
     }
 }
