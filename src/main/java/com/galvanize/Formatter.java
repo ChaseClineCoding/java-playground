@@ -3,9 +3,10 @@ package com.galvanize;
 import java.util.*;
 
 public class Formatter {
-    private String[] lines;
 
+    private String[] lines;
     private Deque<String> tags = new LinkedList<>();
+
     public Formatter(String[] lines) {
         this.lines = lines;
     }
