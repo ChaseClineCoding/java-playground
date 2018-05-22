@@ -1,35 +1,42 @@
 package com.galvanize;
 
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
 
 public class Formatter {
-    String[] lines;
-    HashMap<String, Integer> tabMap = new HashMap<>();
+    private String[] lines;
 
+    private Deque<String> tags = new LinkedList<>();
     public Formatter(String[] lines) {
         this.lines = lines;
     }
 
-    private String[] format(String[] lines) {
-        Integer numberOfTabs = 0;
-        String[] formattedLines = lines;
+    public String[] format() {
         for (int i = 0; i < lines.length; i++) {
-            tabMap.putIfAbsent(retrieveTag(lines[i]), numberOfTabs);
-
+            if (!tags.isEmpty() && tags.peekLast().equals(retrieveTag(lines[i]))) {
+                lines[i] = addTabs(tags.size()-1) + lines[i];
+                tags.removeLast();
+            } else {
+                tags.offer(retrieveTag(lines[i]));
+                lines[i] = addTabs(tags.size()-1) + lines[i];
+            }
         }
-        return formattedLines;
+        return lines;
     }
 
-    private String retrieveTag(String string) {
-        Pattern pattern = Pattern.compile("[a-zA-Z]+");
-        Matcher matcher = pattern.matcher(string);
-        return matcher.group();
+    public String[] getLines() {
+        return lines;
     }
 
-    private String addTabs() {
-        return "\\t";
+    private static String retrieveTag(String string) {
+        return String.join("", string.split("\\W"));
+    }
+
+    private static String addTabs(int nTabs) {
+        String tabs = "";
+        for (int i = 0; i < nTabs; i++) {
+            tabs = tabs.concat("\t");
+        }
+        return tabs;
     }
 
 }
