@@ -13,11 +13,11 @@ public class Formatter {
 
     public String[] format() {
         for (int i = 0; i < lines.length; i++) {
-            if (!tags.isEmpty() && tags.peekLast().equals(retrieveTag(lines[i]))) {
+            if (!tags.isEmpty() && lines[i].contains("/" + tags.peekFirst())) {
                 lines[i] = addTabs(tags.size()-1) + lines[i];
-                tags.removeLast();
+                tags.pop();
             } else {
-                tags.offer(retrieveTag(lines[i]));
+                tags.push(retrieveTag(lines[i]));
                 lines[i] = addTabs(tags.size()-1) + lines[i];
             }
         }
